@@ -1,5 +1,5 @@
 ## Dataset Content
-* The dataset is sourced from [Kaggle](https://www.kaggle.com/codeinstitute/cherry-leaves). We created then a fictitious user story where predictive analytics can be applied in a real project in the workplace.
+* The dataset is sourced from [Kaggle](https://www.kaggle.com/codeinstitute/cherry-leaves).
 * The dataset contains +4 thousand images taken from client's crop fields. The images show cherry leaves that are healthy and cherry leaves that contain powdery mildew, which is a fungal disease that affects a wide range of plants. The cherry plantation crop is one of their finest products in the portfolio and the company is concerned about supplying the market with a product of compromised quality.
 
 
@@ -15,29 +15,78 @@ To save time in this process, the IT team suggested an ML system that is capable
 
 
 ## Hypothesis and how to validate?
-* List here your project hypothesis(es) and how you envision to validate it (them).
+* We suspected powdery mildew leaves to have clear signs.
+An Image Montage shows that typically a leaf had a white powdery like covering on it.
+* Average Image, Variability Image and Difference between Averages studies did reveal clear a pattern to differentiate the leaves.
+* Powdery mildew leaves clearly have the white shadow covering on them.
 
 
 ## Rationale to map the business requirements to the Data Visualizations and ML tasks
-* List your business requirements and a rationale to map them to the Data Visualizations and ML tasks.
+* **Business Requirement 1**: Data Visualization 
+	* We will display the "mean" and "standard deviation" images for healthy and powdery mildew leaves.
+ 	* We will display the difference between an average healthy leaf and an average powdery mildew leaf.
+	* We will display a image montage for either healthy or powdery mildew leaves.
+	
+	
+
+* **Business Requirement 2**:  Classification
+	* We want to predict if a given leaf is effected or not by powdery mildew. 
+	* We want to build a binary classifier and generate reports.
 
 
 ## ML Business Case
-* In the previous bullet, you potentially visualized a ML task to answer a business requirement. You should frame the business case using the method we covered in the course.
+* We want a ML model to predict if a leaf is effected by powdery mildew or not, based on historical image data. It is a supervised model, a 2-class, single-label, classification model.
+* Our ideal outcome is provide the Farmy & Foods team with a faster and reliable diagnostic if a given cell is effected or not by powdery mildew.
+* The model success metrics are
+	* Accuracy of 97% or above on the test set.
+* The model output is defined as a flag, indicating if the leaf has powdery mildew or not and the associated probability of being effected or not. The Farmy & Foods team will do the testing workflow as usual and upload the picture to an App. The prediction can be made on the fly (not in batches).
+* Heuristics: The current diagnostic needs an experienced staff and detailed inspection to distinguish effected and not effected leaves. A leaf sample is collected and examined. Visual criteria are used to detect powdery mildew. It leaves room to produce inaccurate diagnostics due to human errors. On top of that, there is a significant time loss due to the manual process.
+* We have extracted the data of 4208 images from this dataset and saved it to [kaggle dataset directory](https://www.kaggle.com/datasets/codeinstitute/cherry-leaves) for model training.
+	* Train data - target: powdery mildew or not; features: all images
 
 
-## Dashboard Design
-* List all dashboard pages and its content, either block of information or widgets, like: buttons, checkbox, image, or any other item that your dashboard library supports.
-* Eventually, during the project development, you may revisit your dashboard plan to update a give feature (for example, in the beginning of the project you were confident you would use a given plot to display an insight but eventually you needed to use another plot type).
+## Dashboard Design (Streamlit App User Interface)
+
+### Page 1: Quick Project Summary
+* Quick project summary
+	* General Information
+        * Powdery mildew is a fungal disease of the foliage, stems and occasionally flowers and fruit where a superficial fungal growth covers the surface of the plant.
+        * A leaf is collected and examined and visual criteria are used to detect powdery mildew.
+	* Project Dataset
+		The dataset contains 4208 cherry leaves images provided by Farmy & Foods, taken from their crops.
+	* Business requirements
+		*  The client is interested to have a study to visually differentiate between a healthy  and powdery mildew leaf.
+		*  The client is interested to tell whether a given leaf is effected by powdery mildew or not.
+
+### Page 2: Cells Visualizer
+* It will answer business requirement 1
+	* Checkbox 1 - Difference between average and variability image
+	* Checkbox 2 - Differences between average healthy and average powdery mildew leaves
+	* Checkbox 3 - Image Montage
+
+### Page 3: Malaria Detector
+* Business requirement 2 information - "The client is interested to tell whether a given leaf contains powdery mildew or not."
+* Link to download a set of healthy and powdery mildew leaf images for live prediction. [kaggle dataset directory](https://www.kaggle.com/datasets/codeinstitute/cherry-leaves)
+* User Interface with a file uploader widget. The user can upload multiple leaf images. It will display the image and a prediction statement, indicating if the leaf is effected or not with powdery mildew and the probability associated with this statement. 
+* Table with image name and prediction results.
+* Download button to download table.
+
+### Page 4: Project Hypothesis and Validation
+* Block for the project hypothesis, describe the conclusion and validation.
+
+### Page 5: ML Performance Metrics
+* Label Frequencies for Train, Validation and Test Sets
+* Model History - Accuracy and Losses
+* Model evaluation result
 
 
 ## Unfixed Bugs
-* You will need to mention unfixed bugs and why they were not fixed. This section should include shortcomings of the frameworks or technologies used. Although time can be a big variable to consider, paucity of time and difficulty understanding implementation is not a valid reason to leave bugs unfixed.
+    No Known bugs
 
 ## Deployment
 ### Heroku
 
-* The App live link is: https://YOUR_APP_NAME.herokuapp.com/ 
+* The App live link is: https://mildew-detection-live.herokuapp.com/ 
 * The project was deployed to Heroku using the following steps.
 
 1. Log in to Heroku and create an App
@@ -53,21 +102,19 @@ To save time in this process, the IT team suggested an ML system that is capable
 
 ## Credits 
 
-* In this section you need to reference where you got your content, media and extra help from. It is common practice to use code from other repositories and tutorials, however, it is important to be very specific about these sources to avoid plagiarism. 
-* You can break the credits section up into Content and Media, depending on what you have included in your project. 
+* All the functions that has the comment
+    * "# This function is from the Code Institutes walkthrough project"
+was taken from the code intitute walkthrough project
+* The dashboard is inspired by the code instute walkthrough project because their context is very similar
 
 ### Content 
 
-- The text for the Home page was taken from Wikipedia Article A
-- Instructions on how to implement form validation on the Sign Up page was taken from [Specific YouTube Tutorial](https://www.youtube.com/)
 - The icons in the footer were taken from [Font Awesome](https://fontawesome.com/)
 
 ### Media
-
-- The photos used on the home and sign up page are from This Open Source site
-- The images used for the gallery page were taken from this other open source site
+- the images are from this [kaggle dataset directory](https://www.kaggle.com/datasets/codeinstitute/cherry-leaves)
 
 
 
 ## Acknowledgements (optional)
-* In case you would like to thank the people that provided support through this project.
+- The code instatue walkthrough project resourses were a big help
